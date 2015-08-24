@@ -10,3 +10,4 @@ spec/dummy/tmp/
 spec/dummy/db/*.sqlite3
 spec/dummy/log/*.log
 Gemfile.lock
+.ruby-*
