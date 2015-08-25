@@ -10,6 +10,9 @@ ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
 
 load File.dirname(__FILE__) + '/schema.rb'
 
+# require initializers
+Dir["#{File.dirname(__FILE__)}/../config/initializers/**/*.rb"].each { |f| require f }
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
