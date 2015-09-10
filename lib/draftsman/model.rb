@@ -319,7 +319,7 @@ module Draftsman
               data[:event]          = 'update'
               data[:object_changes] = changes_for_draftsman if track_object_changes_for_draft?
               send "build_#{self.class.draft_association_name}", data
-              
+
               if send(self.class.draft_association_name).save
                 update_column "#{self.class.draft_association_name}_id", send(self.class.draft_association_name).id
                 update_skipped_attributes
@@ -451,7 +451,7 @@ module Draftsman
         if self.class.draftsman_options[:only].any?
           only_changes = {}
           only_changed_attributes = self.changed - self.class.draftsman_options[:only]
-          
+
           only_changed_attributes.each do |attribute|
             only_changes[attribute] = self.changes[attribute].last
           end

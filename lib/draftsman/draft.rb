@@ -189,7 +189,7 @@ class Draftsman::Draft < ActiveRecord::Base
           self.item.send("#{key}=", value)
         end
         self.item.save(:validate => false)
-        
+
         self.item.reload
 
         # Destroy draft
@@ -262,7 +262,7 @@ class Draftsman::Draft < ActiveRecord::Base
           self.item.class.where(:id => self.item).update_all "#{self.item.class.draft_association_name}_id".to_sym => nil,
                                                              self.item.class.trashed_at_attribute_name => nil
         end
-        
+
         self.destroy
       end
     end
@@ -271,6 +271,15 @@ class Draftsman::Draft < ActiveRecord::Base
   # Returns whether or not this is an `update` event.
   def update?
     self.event == 'update'
+  end
+
+  def new_changes
+    result = {}
+    _changes = self.object_changes
+    _changes.keys.each do |k|
+      result[k] = _changes[k][1]
+    end
+    result
   end
 
 private
